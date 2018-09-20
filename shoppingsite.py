@@ -75,6 +75,16 @@ def show_shopping_cart():
     #
     # Make sure your function can also handle the case wherein no cart has
     # been added to the session
+    cart_list = session["cart"]
+
+    for melon in cart_list.items():
+        print(melon)
+        for melon_id, quantity in melon:
+            melon_name = melon.get_by_id(melon_id)
+            print("dhgsdh", melon_name)
+        # melon = melon.get_by_id(melon_id)
+        # print(melon)
+
 
     return render_template("cart.html")
 
@@ -98,7 +108,6 @@ def add_to_cart(melon_id):
     # - flash a success message
     # - redirect the user to the cart page
 
-    # melon = melons.get_by_id(melon_id)
     session["cart"] = {}
 
     if "cart" in session.keys():
@@ -106,7 +115,6 @@ def add_to_cart(melon_id):
             count = session["cart"][melon_id]
             session["cart"][melon_id] = count + 1
         else:
-            print("printing cart",session ["cart"])
             session["cart"][melon_id] = 1            
     else:
         session["cart"] = {}
